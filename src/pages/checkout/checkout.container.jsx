@@ -1,6 +1,5 @@
 import React from 'react';
-import { graphql, Query } from 'react-apollo';
-import { flowRight } from 'lodash';
+import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 // import { GET_CART_HIDDEN } from '../../graphql/resolver';

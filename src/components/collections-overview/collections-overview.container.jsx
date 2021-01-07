@@ -6,7 +6,7 @@ import CollectionsOverview from './collections-overview.component';
 import Spinner from '../spinner/spinner.component';
 
 const GET_COLLECTION = gql`
-  {
+  query getCollections {
     collections {
       id
       title
@@ -20,13 +20,16 @@ const GET_COLLECTION = gql`
   }
 `;
 
-const CollectionsOverviewContainer = () => (
-  <Query query={GET_COLLECTION}>
-    {({ loading, data }) => {
-      if (loading) return <Spinner />;
-      return <CollectionsOverview collections={data.collections} />;
-    }}
-  </Query>
-);
+const CollectionsOverviewContainer = () => {
+  return (
+    <Query query={GET_COLLECTION}>
+      {({ loading, data }) => {
+        if (loading) return <Spinner />;
+        const collections = data.collections;
+        return <CollectionsOverview collections={collections} />;
+      }}
+    </Query>
+  );
+};
 
 export default CollectionsOverviewContainer;
