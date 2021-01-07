@@ -13,11 +13,24 @@ export const typeDefs = gql`
     quantity: Int
   }
 
+  extend type DateTime {
+    nanoseconds: Int!
+    seconds: Int!
+  }
+
+  extend type User {
+    id: ID!
+    displayName: String!
+    email: String!
+    createdAt: DateTime!
+  }
+
   extend type Mutation {
     ToggleCartHidden: Boolean!
     AddItemToCart(item: Item!): [Item]!
     RemoveItemFromCart(item: Item!): [Item]!
     ClearItemFromCart(item: Item!): [Item]!
+    SetCurrentUser(user: User!): User!
   }
 `;
 
@@ -42,6 +55,12 @@ const GET_CART_TOTAL = gql`
 const GET_CART_ITEMS = gql`
   {
     cartItems @client
+  }
+`;
+
+const GET_CURRENT_USER = gql`
+  {
+    currentUser @client
   }
 `;
 
@@ -111,6 +130,15 @@ export const resolvers = {
       updateCartItemsRelatedQueries(cache, newCartItems);
 
       return newCartItems;
+    },
+
+    setCurrentUser: (_root, { user }, { cache }) => {
+      cache.writeQuery({
+        query: GET_CURRENT_USER,
+        data: { currentUser: user },
+      });
+
+      return user;
     },
   },
 };
