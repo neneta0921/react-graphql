@@ -3,13 +3,13 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
-  authDomain: 'crwn-db.firebaseapp.com',
-  databaseURL: 'https://crwn-db.firebaseio.com',
-  projectId: 'crwn-db',
-  storageBucket: 'crwn-db.appspot.com',
-  messagingSenderId: '850995411664',
-  appId: '1:850995411664:web:7ddc01d597846f65'
+  apiKey: 'AIzaSyCDD7ZwYvV7Kq71JayTei2j0jvyJDnCFhY',
+  authDomain: 'crwn-db-e2485.firebaseapp.com',
+  projectId: 'crwn-db-e2485',
+  storageBucket: 'crwn-db-e2485.appspot.com',
+  messagingSenderId: '796074878404',
+  appId: '1:796074878404:web:096df5049a7c807b3db091',
+  measurementId: 'G-CXEV5HF04L',
 };
 
 firebase.initializeApp(config);
@@ -29,7 +29,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (error) {
       console.log('error creating user', error.message);

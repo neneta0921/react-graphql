@@ -6,7 +6,7 @@ import { gql } from 'apollo-boost';
 
 import Header from './header.component';
 
-export const GET_CART_HIDDEN = gql`
+const GET_CART_HIDDEN = gql`
   {
     cartHidden @client
   }

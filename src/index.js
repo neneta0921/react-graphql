@@ -6,7 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { ApolloProvider } from 'react-apollo';
 import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-boost';
+import { ApolloClient, gql } from 'apollo-boost';
 
 import { store, persistor } from './redux/store';
 import { typeDefs, resolvers } from './graphql/resolver';
@@ -26,11 +26,34 @@ const client = new ApolloClient({
   resolvers,
 });
 
+client
+  .query({
+    query: gql`
+      {
+        collections {
+          id
+          title
+          items {
+            id
+            name
+            price
+            imageUrl
+          }
+        }
+      }
+    `,
+  })
+  .then((res) => {
+    const collections = res.data;
+  });
+
 client.writeData({
   data: {
     cartHidden: true,
     cartItems: [],
+    // collections: [],
     itemCount: 0,
+    cartTotal: 0,
   },
 });
 
