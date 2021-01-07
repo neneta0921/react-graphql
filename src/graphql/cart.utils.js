@@ -32,3 +32,6 @@ export const getCartTotal = (cartItems) =>
     (accumulatedQuantity, cartItem) => accumulatedQuantity + cartItem.quantity * cartItem.price,
     0
   );
+
+export const clearItemFromCart = (cartItems, cartItemToClear) =>
+  cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);

@@ -2,31 +2,21 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
-// import { GET_CART_HIDDEN } from '../../graphql/resolver';
-
 import CheckoutPage from './checkout.component';
 
-const GET_CART_ITEMS = gql`
+const GET_CART_ITEMS_AND_TOTAL = gql`
   {
     cartItems @client
-  }
-`;
-
-const GET_CART_TOTAL = gql`
-  {
     cartTotal @client
   }
 `;
 
 const CheckoutPageContainer = () => (
-  <Query query={GET_CART_ITEMS}>
-    {({ data: { cartItems } }) => (
-      <Query query={GET_CART_TOTAL}>
-        {({ data: { cartTotal } }) => <CheckoutPage cartItems={cartItems} cartTotal={cartTotal} />}
-      </Query>
+  <Query query={GET_CART_ITEMS_AND_TOTAL}>
+    {({ data: { cartItems, cartTotal } }) => (
+      <CheckoutPage cartItems={cartItems} total={cartTotal} />
     )}
   </Query>
 );
 
-// export default flowRight(graphql(GET_CART_ITEMS), graphql(GET_CART_TOTAL))(CheckoutPageContainer);
 export default CheckoutPageContainer;
